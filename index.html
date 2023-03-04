@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rope on canvas</title>
+</head>
+
+<body>
+    <label>Relax</label>
+    <br />
+    <input type="range" onchange="line.tension(Number(event.target.value)); stage.draw();" step="0.05" min="0" max="0.5"
+        value="0.5" />
+    <div id="container"></div>
+</body>
+<script src="konva.js"></script>
+<script>
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    const stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height,
+    });
+
+    const layer = new Konva.Layer();
+    stage.add(layer);
+
+    const pointsArr = [
+        50, 50, 100, 200, 100, 50, 150, 200,
+        200, 200, 200, 300, 250, 300, 250, 200,
+        300, 200, 300, 300, 350, 300, 350, 200,
+        400, 200, 400, 450, 350, 450, 350, 350,
+        300, 350, 300, 450, 250, 450, 250, 350,
+        200, 350, 200, 500, 500, 500, 700, 200
+
+    ];
+
+    const line = new Konva.Line({
+        x: 0,
+        y: 0,
+        points: pointsArr,
+        stroke: 'darkred',
+        tension: 0.5
+    });
+
+    layer.add(line);
+
+    for (let i = 0; i < pointsArr.length; i += 2) {
+        const circle = new Konva.Circle({
+            radius: 5,
+            fill: 'black',
+            x: pointsArr[i],
+            y: pointsArr[i + 1]
+        });
+
+
+        layer.add(circle);
+
+    }
+
+
+
+</script>
+
+</html>
